@@ -1,0 +1,24 @@
+
+
+  .box {
+    background: #ccc;
+    display: -webkit-box;
+    height: 44px;
+    overflow: hidden;
+  }
+  /* .box-img {
+    width: 10px;
+    height: 10px;
+    background: #fff;
+  }
+  .i-block {
+    display: inline-block;
+  }
+
+  .class1 {
+    color: #ccc
+  }
+
+  .class2 {
+    color: red
+  } */
