@@ -1,40 +1,31 @@
+/** @format */
+
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const {CleanWebpackPlugin} = require('clean-webpack-plugin')
 const paths = require('./paths')
 
 module.exports = {
   entry: {
-    app: './app/index.js' 
+    app: './src/index',
   },
   output: {
     path: path.resolve(__dirname, '../dist'),
-    filename: '[name].bundle.js'
+    filename: '[name].bundle.js',
   },
   resolve: {
-    extensions: [ '.tsx', '.ts', '.js', '.jsx' ]
+    extensions: ['.tsx', '.ts', '.js', '.jsx'],
   },
   module: {
-    rules: [
-      {
-        test: /\.tsx?$/,
-        use: 'ts-loader',
-        exclude: /node_modules/
-      },
-      {
-        test: /\.js|jsx|tsx$/,
-        exclude: /node_modules/,
-        enforce: 'pre',
-        use: [{
-          options: {
-            
-          },
-          loader: 'eslint-loader',
-        }, {
-          loader: 'babel-loader',
-        }]
-      }
-    ]
+    rules: [{
+      test: /\.ts|tsx?$/,
+      use:  [{
+        loader: 'babel-loader',
+      }, {
+        loader: 'ts-loader'
+      }],
+      exclude: /node_modules/,
+    }],
   },
   plugins: [
     new CleanWebpackPlugin(),
@@ -43,5 +34,5 @@ module.exports = {
       inject: true,
       template: paths.appHtml,
     }),
-  ]
+  ],
 }

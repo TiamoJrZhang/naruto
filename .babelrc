@@ -5,24 +5,17 @@
       "@babel/preset-env",
       {
         "targets": {
-          "browsers": [
-            "last 2 versions",
-            "Firefox ESR",
-            "> 1%",
-            "ie >= 11",
-            "iOS >= 8",
-            "Android >= 4",
-          ],
-        },
-      },
-    ],
+          "browsers": ["last 2 versions", "Firefox ESR", "> 1%", "ie >= 11", "iOS >= 8", "Android >= 4"]
+        }
+      }
+    ]
   ],
   "plugins": [
     [
       "@babel/plugin-transform-runtime",
       {
         "corejs": 2,
-        "helpers": true,
+        "helpers": true
         // "regenerator": true,
         // "useESModules": false
       }

@@ -1,3 +1,5 @@
+/** @format */
+
 const webpackDevServer = require('webpack-dev-server')
 const webpack = require('webpack')
 
@@ -6,7 +8,7 @@ const options = {
   contentBase: './dist',
   hot: true,
   host: 'localhost',
-  open: ''
+  open: '',
 }
 
 webpackDevServer.addDevServerEntrypoints(config, options)

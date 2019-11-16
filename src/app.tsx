@@ -2,10 +2,9 @@
 
 import * as React from 'react'
 
-class App extends React.Component {
+class App extends React.Component<any, any> {
   render() {
-    var a = 1
-    return <div>{a}</div>
+    return null as any
   }
 }
 

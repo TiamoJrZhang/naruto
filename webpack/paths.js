@@ -1,11 +1,13 @@
-'use strict';
+/** @format */
 
-const path = require('path');
-const fs = require('fs');
+'use strict'
 
-const appDirectory = fs.realpathSync(process.cwd());
-const resolveApp = relativePath => path.resolve(appDirectory, relativePath);
+const path = require('path')
+const fs = require('fs')
+
+const appDirectory = fs.realpathSync(process.cwd())
+const resolveApp = relativePath => path.resolve(appDirectory, relativePath)
 
 module.exports = {
-  appHtml: resolveApp('public/index.html')
-};
+  appHtml: resolveApp('public/index.html'),
+}
