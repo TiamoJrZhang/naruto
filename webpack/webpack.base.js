@@ -7,7 +7,7 @@ const paths = require('./paths')
 
 module.exports = {
   entry: {
-    app: './src/index',
+    app: './index',
   },
   output: {
     path: path.resolve(__dirname, '../dist'),
