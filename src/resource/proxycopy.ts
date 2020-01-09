@@ -36,7 +36,7 @@ const objectTraps: ProxyHandler<object | Array<any>> = {
   },
   set(target: any, key: string, val: any) {
     const copy = getCopy(target)
-    const newVal = getProxy(val)
+    const newVal = getProxy(val) as any
     copy[key] = isProxy(newVal) ? newVal[MY_IMMER] : newVal 
     return true
   }
