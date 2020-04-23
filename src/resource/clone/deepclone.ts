@@ -6,11 +6,11 @@
  * 方式一采用递归的方式，但是会爆栈
  * 方式二采用循环的方式，破解递归爆栈
  */
-function isObject(source) {
+export function isObject(source: any) {
   return typeof source === 'object' && source !== null
 }
 // 方式一
-function deepClone(source, hash = new Map()) {
+export function deepClone(source: any, hash = new Map()) {
   if (!isObject(source)) return source
   if (hash.get(source)) return hash.get(source)
   const target = Array.isArray(source) ? source.slice() : {...source}
@@ -26,8 +26,10 @@ function deepClone(source, hash = new Map()) {
 }
 
 //方式二
-function cloneLoop(source) {
-  const res = {}
+export function cloneLoop(source: any, hash = new Map()) {
+  const res: {
+    [key: string]: any
+  } = {}
   const stack = [{
     data: source
   }]
@@ -35,8 +37,11 @@ function cloneLoop(source) {
   while(stack.length) {
     const node = stack.pop()
     const data = node.data
+    if (hash.get(data)) return hash.get(data)
+    const target = Array.isArray(data) ? data.slice() : {...data}
+    hash.set(data, target)
 
-    Reflect.ownKeys(data).forEach(v => {
+    Reflect.ownKeys(data).forEach((v: string) => {
       if (isObject(data[v])) {
         stack.push({
           data: data[v]
@@ -48,10 +53,9 @@ function cloneLoop(source) {
   }
 
   return res
-
 }
 
-var a = {
+var a: any = {
 	name: "muyiy",
 	a1: undefined,
 	a2: null,

@@ -3,6 +3,10 @@
     "types": [
       "node"
     ],
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    },
     "outDir": "./dist/",
     "sourceMap": true,
     "noImplicitAny": true,
@@ -12,6 +16,7 @@
     "jsx": "react",
     "allowJs": true,
     "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "moduleResolution": "node",
   }
 }

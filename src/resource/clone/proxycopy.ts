@@ -30,7 +30,7 @@ const getProxy = <T extends object>(data: T): object => {
 
 const objectTraps: ProxyHandler<object | Array<any>> = {
   get(target: any, key: string): any {
-    if (isProxy(target)) return target
+    if (key === MY_IMMER) return target
     const data = copies.get(target) || target
     return getProxy(data[key])
   },
