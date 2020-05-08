@@ -14,9 +14,6 @@
     "start:mine": "node ./webpackModule/webpack.js",
     "test": "jest --config jest.config.js --no-cache"
   },
-  "engines": {
-    "node": ">=10.15.3"
-  },
   "husky": {
     "hooks": {
       "pre-commit": "npm run lint-staged"
