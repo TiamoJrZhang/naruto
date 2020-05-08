@@ -1,6 +1,8 @@
-import { useEffect, useState, useCallback } from 'react'
+/** @format */
+
+import {useEffect, useState, useCallback} from 'react'
 import produce from 'immer'
-  
+
 export const useDocTitle = (title: string) => {
   useEffect(() => {
     document.title = title
@@ -12,22 +14,22 @@ export const useDocTitle = (title: string) => {
 }
 
 export const useInputVal = (initVal: any) => {
-  const [ value, setValue ] = useState(initVal)
+  const [value, setValue] = useState(initVal)
 
-  const onChange = useCallback((event) => {
+  const onChange = useCallback(event => {
     setValue(event.target.value)
   }, [])
 
-  return { value, onChange }
+  return {value, onChange}
 }
 
 export const useImmer = (initialValue: any) => {
-  const [ val, updateValue ] = useState(initialValue)
+  const [val, updateValue] = useState(initialValue)
 
   return [
     val,
     useCallback(updater => {
-      updateValue(produce(updater));
-    }, [])
+      updateValue(produce(updater))
+    }, []),
   ]
 }

@@ -1,9 +1,13 @@
+/** @format */
+
 import React from 'react'
+import TextArea from '@/components/TextArea/textarea'
 
 const Home = () => {
-
   return (
-    <div>This is Home</div> 
+    <div>
+      <TextArea />
+    </div>
   )
 }
 

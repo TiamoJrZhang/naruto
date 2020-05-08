@@ -1,8 +1,5 @@
 {
   "compilerOptions": {
-    "types": [
-      "node"
-    ],
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
@@ -10,13 +7,13 @@
     "outDir": "./dist/",
     "sourceMap": true,
     "noImplicitAny": true,
-    "sourceMap": true,
     "module": "es6",
     "target": "es5",
     "jsx": "react",
     "allowJs": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "moduleResolution": "node",
-  }
+    "moduleResolution": "node"
+  },
+  "exclude": ["node_modules", "dist", "jest"]
 }

@@ -2,7 +2,7 @@
 
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const {CleanWebpackPlugin} = require('clean-webpack-plugin')
 const paths = require('./paths')
 
 module.exports = {
@@ -16,31 +16,38 @@ module.exports = {
   resolve: {
     extensions: ['.tsx', '.ts', '.js', '.jsx'],
     alias: {
-      '@': paths.appSrc
-    }
+      '@': paths.appSrc,
+    },
   },
   module: {
-    rules: [{
-      test: /\.ts|tsx|js?$/,
-      use: [{
-        loader: 'babel-loader',
-      }, {
-        loader: 'ts-loader'
-      }],
-      include: [paths.appSrc, paths.appIndex]
-    }, {
-      test: /\.less$/,
-      use: [{
-        loader: 'style-loader'
-      }, {
-        loader: 'css-loader'
-      }, {
-        loader: 'less-loader',
-        options: {
-          javascriptEnabled: true
-        }
-      }]
-    }],
+    rules: [
+      {
+        test: /\.ts|tsx|js?$/,
+        use: [
+          {
+            loader: 'babel-loader',
+          },
+        ],
+        include: [paths.appSrc, paths.appIndex, ...paths.antdSrc],
+      },
+      {
+        test: /\.less$/,
+        use: [
+          {
+            loader: 'style-loader',
+          },
+          {
+            loader: 'css-loader',
+          },
+          {
+            loader: 'less-loader',
+            options: {
+              javascriptEnabled: true,
+            },
+          },
+        ],
+      },
+    ],
   },
   plugins: [
     new CleanWebpackPlugin(),

@@ -1,2 +1,5 @@
-import { combineReducers } from 'redux'
+/** @format */
+
+import {combineReducers} from 'redux'
+
 export default combineReducers({})

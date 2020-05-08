@@ -1,0 +1,75 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button renders correctly 1`] = `
+<Button>
+  <div>
+    <Button
+      block={false}
+      ghost={false}
+      htmlType="button"
+      loading={false}
+    >
+      <Wave>
+        <button
+          className="ant-btn"
+          onClick={[Function]}
+          type="button"
+        >
+          <LoadingIcon
+            existIcon={false}
+            loading={false}
+            prefixCls="ant-btn"
+          >
+            <ForwardRef
+              motionName="ant-btn-loading-icon-motion"
+              onAppearActive={[Function]}
+              onAppearStart={[Function]}
+              onEnterActive={[Function]}
+              onEnterStart={[Function]}
+              onLeaveActive={[Function]}
+              onLeaveStart={[Function]}
+              removeOnLeave={true}
+              visible={false}
+            >
+              <CSSMotion
+                internalRef={null}
+                motionAppear={true}
+                motionEnter={true}
+                motionLeave={true}
+                motionName="ant-btn-loading-icon-motion"
+                onAppearActive={[Function]}
+                onAppearStart={[Function]}
+                onEnterActive={[Function]}
+                onEnterStart={[Function]}
+                onLeaveActive={[Function]}
+                onLeaveStart={[Function]}
+                removeOnLeave={true}
+                visible={false}
+              />
+            </ForwardRef>
+          </LoadingIcon>
+          <span
+            key=".0"
+          >
+            Follow
+          </span>
+        </button>
+      </Wave>
+    </Button>
+  </div>
+</Button>
+`;
+
+exports[`Button should support link button 1`] = `
+<div>
+  <a
+    class="ant-btn"
+    href="http://ant.design"
+    target="_blank"
+  >
+    <span>
+      link button
+    </span>
+  </a>
+</div>
+`;
