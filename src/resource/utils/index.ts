@@ -1,4 +1,3 @@
-/** @format */
 
 function fakeCall(context: any) {
   context.fn = this
