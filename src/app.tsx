@@ -1,5 +1,3 @@
-/** @format */
-
 import React from 'react'
 import BasicLayout from '@/bussiness/components/basiclayout'
 

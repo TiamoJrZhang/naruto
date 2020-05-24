@@ -4,8 +4,6 @@
  * 解决symbol属性值拷贝，使用Reflect.ownKeys
  * 方式一采用递归的方式，但是会爆栈
  * 方式二采用循环的方式，破解递归爆栈
- *
- * @format
  */
 
 export function isObject(source: any): number {

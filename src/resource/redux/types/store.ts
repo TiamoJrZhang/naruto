@@ -1,5 +1,3 @@
-/** @format */
-
 import {AnyAction} from './actions'
 import {Reducer} from './reducers'
 

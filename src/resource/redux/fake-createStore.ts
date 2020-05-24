@@ -1,5 +1,3 @@
-/** @format */
-
 import {Reducer} from './types/reducers'
 import {AnyAction} from './types/actions'
 import {Store, StoreEnhancer, Dispatch} from './types/store'

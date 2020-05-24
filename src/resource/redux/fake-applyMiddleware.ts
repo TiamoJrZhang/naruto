@@ -1,5 +1,3 @@
-/** @format */
-
 import {Middleware, MiddlewareApi} from './types/middleware'
 import {Reducer} from './types/reducers'
 import {AnyAction} from './types/actions'

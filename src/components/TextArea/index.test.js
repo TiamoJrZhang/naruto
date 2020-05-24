@@ -1,5 +1,3 @@
-/** @format */
-
 import React from 'react'
 import {mount} from 'enzyme'
 import TextArea from './textarea'

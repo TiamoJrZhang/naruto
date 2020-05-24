@@ -1,5 +1,3 @@
-/** @format */
-
 import {Dispatch} from './store'
 import {AnyAction} from './actions'
 

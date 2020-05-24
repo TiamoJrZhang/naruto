@@ -1,5 +1,3 @@
-/** @format */
-
 import React, {Component} from 'react'
 
 type KeyboardHandler = React.KeyboardEventHandler<HTMLTextAreaElement>
@@ -12,7 +10,17 @@ export interface TextAreaProps {
 }
 
 class Textarea extends Component<TextAreaProps> {
+  constructor(props) {
+    super(props)
+    this.justTest = this.justTest.bind(this)
+  }
+
+  justTest = () => {
+    console.log('this...', this)
+  }
+
   handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    this.justTest()
     const {onPressEnter, onKeyDown} = this.props
     if (e.keyCode === 13 && onPressEnter) {
       onPressEnter(e)

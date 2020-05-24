@@ -1,5 +1,3 @@
-/** @format */
-
 const proxies = new Map()
 const copies = new Map()
 const MY_IMMER = 'MY_IMMER'
