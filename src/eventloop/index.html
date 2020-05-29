@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<meta charset="UTF-8">
+<head>
+  <title>Document</title>
+  <script src="./index.js"></script>
+</head>
+<style>
+  .trans2 {
+    transition: transform .2s ease-in-out;
+  }
+  .move {
+    left: 100px;
+    position: absolute;
+    transition: left .2s ease-in-out;
+    z-index: 3;
+    background: #ccc;
+  }
+  .table {
+    width: 100px; 
+    height: 100px;
+    left: 0;
+    position: absolute;
+  }
+</style>
+<body>
+  <!-- <div>
+    <div class="table">this is table</div>
+    <div style="height: 100px;"></div>
+    <div class="box">box1</div>
+    <div class="box">box1</div>
+    <div class="box">box1</div>
+    <div class="box">box1</div>
+  </div> -->
+
+  <span class="text"></span>
+  <button class="btn">点我</button>
+</body>
+
+</html>

@@ -1,12 +1,13 @@
-import React from 'react'
-import TextArea from '@/components/TextArea/textarea'
+import React, {useEffect} from 'react'
+// import MyPromise from '@/resource/promise'
+import {foo, run, thunkfiy} from '@/resource/promise/generator'
 
 const Home = () => {
-  return (
-    <div>
-      <TextArea />
-    </div>
-  )
+  useEffect(() => {
+    run(foo)
+  }, [])
+
+  return <></>
 }
 
 export default Home

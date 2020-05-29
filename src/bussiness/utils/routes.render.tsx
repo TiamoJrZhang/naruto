@@ -14,14 +14,13 @@ function renderRoutes(routes: RouteConfig[], extraProps = {}, switchProps = {}) 
             strict={route.strict}
             render={props => {
               const clildRoutes = renderRoutes(route.routes)
-              const a = route.render ? (
+              return route.render ? (
                 route.render({...props, ...extraProps, route: route})
               ) : (
                 <route.component {...props} {...extraProps} route={route}>
                   {clildRoutes}
                 </route.component>
               )
-              return a
             }}
           />
         )
