@@ -7,7 +7,7 @@ export default function createStore<A extends AnyAction, S>(
   preloadedState: any,
   enhancer?: StoreEnhancer,
 ): Store<S, A> {
-  if (typeof reducer === 'function') {
+  if (enhancer && typeof enhancer === 'function') {
     return enhancer(createStore)(reducer, preloadedState)
   }
   if (typeof reducer !== 'function') {
@@ -15,7 +15,7 @@ export default function createStore<A extends AnyAction, S>(
   }
 
   const currentReducer: Reducer<S, A> = reducer
-  const currentState = preloadedState
+  let currentState = preloadedState
   let currentListeners: (() => void | null)[] = []
   let nextListeners = currentListeners
   let isDispatching = false
@@ -30,15 +30,15 @@ export default function createStore<A extends AnyAction, S>(
     if (isDispatching || typeof listener !== 'function') return
 
     let isSubscribed = true
-    currentListeners.push(listener)
+    nextListeners.push(listener)
 
     return function unsubscribe() {
       if (isSubscribed || isDispatching) return
       isSubscribed = false
 
       ensureCanMutateNextListeners()
-      const index = currentListeners.indexOf(listener)
-      currentListeners.splice(index, 1)
+      const index = nextListeners.indexOf(listener)
+      nextListeners.splice(index, 1)
       currentListeners = null
     }
   }
@@ -48,7 +48,7 @@ export default function createStore<A extends AnyAction, S>(
 
     try {
       isDispatching = true
-      currentReducer(currentState, action)
+      currentState = currentReducer(currentState, action)
     } catch (error) {
       isDispatching = false
     }

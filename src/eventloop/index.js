@@ -75,9 +75,25 @@ function initBtnClick() {
   })
 }
 
+function frameStartAndEnd() {
+  var frameTime = 1000 / 60
+  var {port1, port2} = new MessageChannel()
+  requestAnimationFrame(function() {
+    var curTime = performance.now()
+    var nextFrameTime = curTime + frameTime
+    port1.postMessage(undefined)
+    console.log('i am runing at rendering', curTime)
+  })
+  port2.onmessage = function() {
+    var curTime2 = performance.now()
+    console.log('i am runing after render', curTime2)
+  }
+}
+
 window.onload = function() {
   // init()
   // addEventListener()
   // initEventLoop()
-  initBtnClick()
+  // initBtnClick()
+  frameStartAndEnd()
 }

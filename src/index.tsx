@@ -7,6 +7,7 @@ import thunk from 'redux-thunk'
 import routes from '@/bussiness/route.config'
 import renderRoutes from '@/bussiness/utils/routes.render'
 import reducers from './reducers'
+import Home from '@/bussiness/page/home'
 
 const store = createStore(
   reducers,
@@ -17,15 +18,16 @@ const store = createStore(
 )
 
 const Root = (
-  <Provider store={store}>
-    <BrowserRouter>
-      {/* <Switch>
-        <Route />
-        <Route />
-      </Switch> */}
-      {renderRoutes(routes)}
-    </BrowserRouter>
-  </Provider>
+  // <Provider store={store}>
+  //   <BrowserRouter>
+  //     {/* <Switch>
+  //       <Route />
+  //       <Route />
+  //     </Switch> */}
+  //     {renderRoutes(routes)}
+  //   </BrowserRouter>
+  // </Provider>
+  <Home />
 )
 
 ReactDOM.render(Root, document.getElementById('root'))

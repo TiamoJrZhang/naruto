@@ -17,6 +17,8 @@ module.exports = {
     extensions: ['.tsx', '.ts', '.js', '.jsx'],
     alias: {
       '@': paths.appSrc,
+      react: 'anujs',
+      'react-dom': 'anujs',
     },
   },
   module: {

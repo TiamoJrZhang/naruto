@@ -75,6 +75,7 @@
     "webpack-merge": "^4.2.1"
   },
   "dependencies": {
+    "anujs": "^1.6.2",
     "@ant-design/pro-layout": "^5.0.5",
     "@babel/runtime": "^7.5.4",
     "@babel/runtime-corejs2": "^7.5.4",
