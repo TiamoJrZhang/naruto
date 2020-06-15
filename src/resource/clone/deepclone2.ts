@@ -1,16 +1,7 @@
-/**
- * 深度拷贝代码实现
- * 解决循环引用，采用hash表的方式
- * 解决symbol属性值拷贝，使用Reflect.ownKeys
- * 方式一采用递归的方式，但是会爆栈
- * 方式二采用循环的方式，破解递归爆栈
- */
-
 function isObject(source: any): boolean {
   return typeof source === 'object' && source != null
 }
 
-//方式一
 export function deepClone(source: any, hashMap = new Map()) {
   if (!isObject(source)) return source
   if (hashMap.get(source)) return source
@@ -41,7 +32,6 @@ function find(uniqueList: any[], data: any) {
   return item
 }
 
-//方式二
 export function deepCloneLoop(source: any) {
   const uniqueList = []
   let end: ResInter = {}
@@ -86,17 +76,3 @@ export function deepCloneLoop(source: any) {
 
   return end
 }
-
-const a: any = {
-  name: 'muyiy',
-  a1: undefined,
-  a2: null,
-  a3: 123,
-  data: {
-    time: +new Date(),
-  },
-}
-a.circleRef = a
-
-deepClone(a)
-deepCloneLoop(a)
