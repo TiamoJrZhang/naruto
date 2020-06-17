@@ -127,9 +127,12 @@ function isPalindrome(s, left, right) {
   return true
 }
 
+//动态规划
 var longestPalindrome1 = function(s) {
   var len = s.length
   if (len < 2) return s
+  var maxlen = 1
+  var begin = 0
   var dp = Array.from(new Array(len), () => new Array(len).fill(0))
   for (var i = 0; i < s.length; i++) {
     dp[i][i] = true
@@ -146,7 +149,43 @@ var longestPalindrome1 = function(s) {
         }
       }
 
-      // if (dp[i][j] && )
+      if (dp[i][j] && j - i + 1 > maxlen) {
+        maxlen = j - i + 1
+        begin = i
+      }
     }
   }
+
+  return s.substring(begin, begin + maxlen)
+}
+
+//中心扩撒法
+var longestPalindrome1 = function(s) {
+  var len = s.length
+  if (len < 2) return s
+  var maxlen = 1
+  var begin = 0
+
+  for (var i = 1; i < len - 1; i++) {
+    var ood = expandAroundCenter(s, i, i)
+    var even = expandAroundCenter(s, i, i + 1)
+    var max = Math.max(ood, even)
+    if (max > maxlen) {
+      maxlen = max
+      begin = i - ((maxLen - 1) >> 1)
+    }
+  }
+
+  return s.substring(begin, begin + maxlen)
+}
+
+function expandAroundCenter(s, left, right) {
+  while (left > 0 && right < s.length) {
+    if (s[left] == s[right]) {
+      left--
+      right++
+    }
+    break
+  }
+  return right - left - 1
 }
