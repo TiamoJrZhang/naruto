@@ -229,10 +229,47 @@ var uniquePathsWithObstacles = function(obstacleGrid) {
 //   [1,5,1],
 //   [4,2,1]
 // ]
+
 // 输出: 7
 // 解释: 因为路径 1→3→1→1→1 的总和最小。
 /**
  * @param {number[][]} grid
  * @return {number}
  */
-var minPathSum = function(grid) {}
+
+//递归
+var minPathSum = function(grid) {
+  const cost = function(grid, i, j) {
+    if (i == grid.length || j == grid[0].length) return Number.MAX_SAFE_INTEGER
+    if (i == grid.length - 1 && j == grid[0].length - 1) return grid[i][j]
+    return grid[i][j] + Math.min(cost(grid, i + 1, j), cost(grid, i, j + 1))
+  }
+
+  return cost(grid, 0, 0)
+}
+
+//dp
+var minPathSum1 = function(grid) {
+  var m = grid.length
+  var n = grid[0].length
+  var dp = new Array(m)
+  for (var i = 0; i < m; i++) {
+    dp[i] = new Array(n).fill(0)
+  }
+
+  for (var i = m - 1; i >= 0; i--) {
+    for (var j = n - 1; j >= 0; j--) {
+      if (i == m - 1 && j == n - 1) {
+        dp[i][j] = grid[i][j]
+      } else if (i == m - 1 && j != n - 1) {
+        dp[i][j] = grid[i][j] + dp[i][j + 1]
+      } else if (i != m - 1 && j == n - 1) {
+        dp[i][j] = grid[i][j] + dp[i + 1][j]
+      } else {
+        dp[i][j] = grid[i][j] + Math.min(dp[i + 1][j], dp[i][j + 1])
+      }
+    }
+  }
+
+  return dp[0][0]
+}
