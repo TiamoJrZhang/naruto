@@ -169,5 +169,3 @@ MyPromise.all = promises => {
 }
 
 export default MyPromise
-
-

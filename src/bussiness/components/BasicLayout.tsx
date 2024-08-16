@@ -1,7 +1,5 @@
 import React from 'react'
-import ProLayout, {
-  PageHeaderWrapper,
-} from '@ant-design/pro-layout'
+import ProLayout, {PageHeaderWrapper} from '@ant-design/pro-layout'
 import route from '@/bussiness/route.config'
 
 export default (props: any) => (
@@ -9,14 +7,12 @@ export default (props: any) => (
     location={{
       pathname: '/welcome',
     }}
-    route={route}
-  >
+    route={route}>
     <PageHeaderWrapper content="欢迎使用">
       <div
         style={{
           height: '120vh',
-        }}
-      >
+        }}>
         {props.children}
       </div>
     </PageHeaderWrapper>

@@ -1,5 +1,4 @@
 import React, {Component, useState, useCallback} from 'react'
-import {fakeNew} from '@/interview/index'
 
 // class Child extends Component {
 //   // const [count, setCount] = useState(0)
@@ -30,23 +29,38 @@ const Child = ({callback}: {callback: () => void}) => {
   return <button onClick={handleClick}>{count} click me</button>
 }
 
-const Home = () => {
-  const [enable, setEnable] = useState(false)
-
-  const callback = useCallback(() => {
-    console.log(111)
-  }, [])
-
-  const handleClick = () => {
-    setEnable(true)
+class Home extends Component {
+  state = {
+    count: 1,
   }
 
-  return (
-    <>
-      <button onClick={handleClick}>test</button>
-      <Child callback={callback} />
-    </>
-  )
+  // const callback = useCallback(() => {
+  //   console.log(111)
+  // }, [])
+
+  handleClick = () => {
+    debugger
+    const {count} = this.state
+    this.setState({
+      count: count + 1,
+    })
+    this.setState({
+      count: count + 1,
+    })
+    this.setState({
+      count: count + 1,
+    })
+    console.log('count...', count)
+  }
+
+  render() {
+    return (
+      <>
+        <button onClick={this.handleClick}>test</button>
+        {/* <Child callback={callback} /> */}
+      </>
+    )
+  }
 }
 
 // class Home extends Component<any, any> {

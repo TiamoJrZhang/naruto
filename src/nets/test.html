@@ -1,0 +1,29 @@
+<!doctype HTML>
+<html>
+
+<head>
+  <title>
+    Hi
+  </title>
+  <script>
+    fetch('http://localhost:3000/cc')
+      .then(data => {
+        console.log(data)
+      })
+
+    setTimeout(() => {
+      fetch('http://localhost:3000/cc?111')
+      .then(data => {
+        console.log(data)
+      })
+    })
+  </script>
+</head>
+
+<body>
+  <h1>
+    Hello
+  </h1>
+</body>
+
+</html>

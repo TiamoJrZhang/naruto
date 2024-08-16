@@ -273,3 +273,104 @@ var minPathSum1 = function(grid) {
 
   return dp[0][0]
 }
+
+
+//最长递增子序列 数组 https://leetcode-cn.com/problems/longest-increasing-subsequence/
+//子序列一般由动态规划求解
+var lengthOfLIS = function(nums) {
+  //dp[i] 为以nums[i]为结尾的严格递增子序列的长度
+  //递推公式 nums[i]需要大于i之前的任意一个元素，
+  //如果和该元素组成的子序列长度比之前的要大，则取这个长度即dp[i] = Math.max(dp[i], dp[j] + 1)
+  //比如 子序列257 这时候长度为3，这是插入4，可以组成子序列24，长度为2，因此还是取3
+  //初始值 dp[i] = 1
+  //草稿画图
+  if (!nums || !nums.length) return 0
+  const dp = new Array(nums.length).fill(1)
+  let ans = 1
+  for (var i = 1; i < nums.length; i ++) {
+    for (var j = 0; j < i; j ++) {
+      if (nums[i] > nums[j]) {
+        dp[i] = Math.max(dp[i], dp[j] + 1)
+        ans = Math.max(ans, dp[i])
+      }
+    }
+  }
+  return ans
+};
+
+//最长连续递增序列 https://leetcode-cn.com/problems/longest-continuous-increasing-subsequence/
+var findLengthOfLCIS = function(nums) {
+  if (!nums || !nums.length) return 0
+    //dp[i] 以nums[i]为结尾的连续递增子序列的长度
+  //如果 num[i] > num[i - 1] dp[i] = dp[i - 1] + 1
+  //dp[i] = 1
+  //画图
+  var dp = new Array(nums.length).fill(1)
+  var ans = 1
+  for (var i = 1; i < nums.length; i ++) {
+    if (nums[i] > nums[i - 1]) {
+      dp[i] = dp[i - 1] + 1
+      ans = Math.max(ans, dp[i])
+    }
+  }
+  return ans
+}
+
+//最长重复子数组 https://leetcode-cn.com/problems/maximum-length-of-repeated-subarray/
+
+ var findLength = function(nums1, nums2) {
+  // dp[i][j]为以nums[i][j]为结尾的公共子数组的长度（连续），连续的话在矩阵上必然是可以连起来的斜线；
+  // 如果nums[i - 1] === nums[j - 1] dp[i][j] = dp[i - 1][j - 1] + 1; 
+  // 否则(这个时候矩阵图脑子要出来）Math.max(dp[i - 1][j], dp[i][j - 1])
+  // 初始值
+  // 画图
+  var m = nums1.length
+  var n = nums2.length
+  var dp = new Array(m + 1)
+  for (var i = 0; i < dp.length; i ++) {
+    dp[i] = new Array(n).fill(0)
+  }
+  var ans = 0
+  for (var i = 1; i <= m; i ++) {
+    for (var j = 1; j <= n; j ++) {
+      if (nums1[i - 1] === nums2[j - 1]) {
+        dp[i][j] = dp[i - 1][j - 1] + 1
+        ans = Math.max(dp[i][j], ans)
+      }
+    }  
+  }
+
+  return ans
+};
+
+
+// 最长公共子序列 https://leetcode-cn.com/problems/longest-common-subsequence/
+var longestCommonSubsequence = function(text1, text2) {
+  //重写
+  //dp[i][j] text1和text2的最长公共子序列最大长度
+  //如果 text1[i - 1] = text2[j - 1] dp[i][j] = dp[i - 1][j - 1] + 1
+  //如果不想等，由于不连续（也就是比如当前两个值相等时，他的dp[i - 1][j - 1]不一定是上次两个值相等的矩阵点），所以当前的长度应该是当前矩阵点上一行的矩阵点和上一列的矩阵点的最大值
+  //即Math.max(dp[i - 1][j], dp[i][j - 1])
+  //初始值：dp[i][j] = 0
+  //为什么循环里需要定义<=m，试想当是最后一个矩阵点的时候，如果text1[i] === text2[j],这时候最后的节点也需要根据前一节点加1得出最大长度
+  var m = text1.length
+  var n = text2.length
+  var dp = new Array(m + 1)
+  for (var i = 0; i < dp.length; i ++) {
+    dp[i] = new Array(n + 1).fill(0)
+  }
+  var ans = 0
+  for (var i = 1; i <= m; i ++) {
+    for (var j = 1; j <= n; j ++) {
+      if (text1[i - 1] === text2[j - 1]) {
+        dp[i][j] = dp[i - 1][j - 1] + 1
+      } else {
+        dp[i][j] = Math.max(dp[i][j - 1], dp[i - 1][j])
+      }
+      ans = Math.max(ans, dp[i][j])
+    } 
+  }
+
+  return ans
+
+};

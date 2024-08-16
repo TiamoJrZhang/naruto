@@ -488,3 +488,57 @@ const rightSideView2 = function(root) {
   helper(root, depth)
   return res
 }
+
+//https://leetcode-cn.com/problems/balanced-binary-tree/
+var isBalanced = function(root) {
+  if (!root) return true
+  return Math.abs(getHeight(root.left) - getHeight(root.right)) <= 1 && isBalanced(root.left) && isBalanced(root.right)
+}
+
+var getHeight = function(root) {
+  if (!root) return 0
+  return Math.max(getHeight(root.left), getHeight(root.right)) + 1
+}
+
+var isBalanced2 = function(root) {
+  var flag = true
+  const helper = function(root) {
+    if (!root) return 0
+
+    var leftHeight = helper(root.left)
+    var rightRight = helper(root.right)
+    if (Math.abs(leftHeight - rightRight > 1)) {
+      flag = false
+      return
+    }
+
+    return Math.max(helper(root.left), helper(root.right)) + 1
+  }
+  helper(root)
+  return flag
+}
+
+//bfs经典模板 https://leetcode-cn.com/problems/binary-tree-level-order-traversal-ii/submissions/
+
+var levelOrderBottom = function(root) {
+  if (!root) return []
+  var ans = []
+  var level = 0
+  var queue = [root]
+  while (queue.length) {
+    var len = queue.length
+    ans[level] = []
+    for (var i = 0; i < len; i++) {
+      var item = queue.shift()
+      ans[level].push(item.val)
+      if (item.left) {
+        queue.push(item.left)
+      }
+      if (item.right) {
+        queue.push(item.right)
+      }
+    }
+    level++
+  }
+  return ans
+}

@@ -180,3 +180,34 @@ MyQueue.prototype.peek = function() {
 MyQueue.prototype.empty = function() {
   return !this.stack1.length && !this.stack2.length
 }
+
+//单调栈
+var nextGreaterElement = function(nums1, nums2) {
+  // 把此类问题比作排队看后面第一个比自己高的
+  // 从后面开始遍历往前面看，就能很好的避免不知道后面什么情况了
+  let stack = []
+  let res = []
+  let map = new Map()
+
+  for (let i = nums2.length - 1; i >= 0; i--) {
+    // 矮个子起开，要你也没用，反正看不见你
+    while (stack.length && nums2[i] >= nums2[stack[stack.length - 1]]) {
+      stack.pop()
+    }
+
+    //有比我个子高的吗？有就是你了，没有就是-1
+    map.set(nums2[i], stack.length ? nums2[stack[stack.length - 1]] : -1)
+
+    // 关键步骤：存储的是下标
+    stack.push(i)
+  }
+
+  nums1.forEach(item => {
+    res.push(map.get(item))
+  })
+  return res
+}
+
+//从后往前首先为2，最后一个数后面肯定没有比最后一个数大的，所以存为-1
+//接着往前一位，前面一位是4，这个时候4的后面也没有比其更大的，所以存为-1
+nextGreaterElement([4, 1, 2], [1, 3, 4, 2])

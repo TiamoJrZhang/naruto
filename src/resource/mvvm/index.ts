@@ -1,13 +1,12 @@
-
 function isPlainObject(obj: any) {
   if (obj === null || typeof obj !== 'object') return false
-  
+
   return Object.getPrototypeOf(obj) === Object.prototype
 }
 
-function Mvvm(options={}) {
+function Mvvm(options = {}) {
   this.$options = options
-  let data = this._data = this.$options.data
+  let data = (this._data = this.$options.data)
 
   //数据劫持
   observe(data)
@@ -15,20 +14,20 @@ function Mvvm(options={}) {
   //this代理this._data
   Object.keys(data).forEach(function(key) {
     Object.defineProperty(this, key, {
-      configurable: true, 
+      configurable: true,
       get() {
         return this._data[key]
       },
       set(newVal) {
         this._data[key] = newVal
-      }
+      },
     })
   })
 }
 
 function observe(data: any) {
   if (!isPlainObject(data)) return data
-  return observeLoop(data) 
+  return observeLoop(data)
 }
 
 function observeLoop(data: any) {
@@ -44,7 +43,7 @@ function observeLoop(data: any) {
         if (val === newVal) return
         val = newVal
         observe(val)
-      }
+      },
     })
   })
 }
@@ -64,7 +63,7 @@ class Deps {
   }
 }
 
-class Watcher  {
+class Watcher {
   fn: Function
   constructor(fn: Function) {
     this.fn = fn
@@ -74,4 +73,3 @@ class Watcher  {
     this.fn()
   }
 }
-

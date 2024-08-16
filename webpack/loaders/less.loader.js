@@ -10,31 +10,27 @@ function removeSourceMappingUrl(content) {
 }
 
 function processResult(loaderContext, resultPromise) {
-  const {
-    callback
-  } = loaderContext
-  resultPromise.then(({
-    css,
-    map,
-    imports
-  }) => {
-    imports.forEach(loaderContext.addDependency, loaderContext)
-    return {
-      css: removeSourceMappingUrl(css),
-      map: typeof map === 'string' ? JSON.parse(map) : map
-    }
-  }, lessError => {
-    if (lessError.filename) {
-      loaderContext.addDependency(lessError.filename)
-    }
+  const {callback} = loaderContext
+  resultPromise
+    .then(
+      ({css, map, imports}) => {
+        imports.forEach(loaderContext.addDependency, loaderContext)
+        return {
+          css: removeSourceMappingUrl(css),
+          map: typeof map === 'string' ? JSON.parse(map) : map,
+        }
+      },
+      lessError => {
+        if (lessError.filename) {
+          loaderContext.addDependency(lessError.filename)
+        }
 
-    throw new Error(lessError)
-  }).then(({
-    css,
-    map
-  }) => {
-    callback(null, css, map);
-  }, callback);
+        throw new Error(lessError)
+      },
+    )
+    .then(({css, map}) => {
+      callback(null, css, map)
+    }, callback)
 }
 
 module.exports = function(source) {
