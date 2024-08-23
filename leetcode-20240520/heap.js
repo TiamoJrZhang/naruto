@@ -177,6 +177,7 @@ function buildHeap2(heap) {
   return heap
 }
 
+// react优先队列
 const queue = []
 
 function push(item) {
@@ -249,62 +250,18 @@ function siftDown() {
  * @return {number}
  */
 
-// var findKthLargest = function(nums, k) {
-//   if (!nums || !nums.length) return
-//   let i = 0
-//   while (i < k) {
-//     swim(i, nums)
-//     i ++
-//   }
-//   for (var j = k; j < nums.length; j ++) {
-//     var top = nums[0]
-//     if (nums[j] > top) {
-//       nums[0] = nums[j]
-//       sink(nums, 0, k)
-//     }
-//   }
-//   function swap(nums, i, j) {
-//     var temp = nums[i]
-//     nums[i] = nums[j]
-//     nums[j] = temp
-//   }
-//   function swim(i, nums) {
-//     while (i > 0 && nums[(i - 1) >> 1] > nums[i]) {
-//       swap(nums, i, (i - 1) >> 1)
-//       i = (i - 1) >> 1
-//     }
-//   }
-//   function sink(nums, index, heapSize) {
-//     while (true) {
-//       let leftIndex = index * 2 + 1
-//       let rightIndex = leftIndex + 1
-//       let minIndex = index
-//       if (leftIndex < heapSize && nums[index] > nums[leftIndex]) {
-//         minIndex = leftIndex
-//       }
-//       if (rightIndex < heapSize && nums[minIndex] > nums[rightIndex]) {
-//         minIndex = rightIndex
-//       }
-//       if (minIndex == index) break
-//       swap(nums, index, minIndex)
-//       index = minIndex
-//     }
-//   }
-//   return nums[0]
-// };
-
 var findKthLargest = function(nums, k) {
-  function swap(nums, i, j) {
-    var temp = nums[i]
+  function swap(i, j, nums) {
+    const temp = nums[i]
     nums[i] = nums[j]
     nums[j] = temp
   }
-  
+
   function swim(index, nums) {
     while(true) {
       let parentIndex = (index - 1) >>> 1
       if (nums[index] < nums[parentIndex]) {
-        swap(nums, index, parentIndex)
+        swap(index, parentIndex, nums)
         index = parentIndex
       } else {
         break
@@ -313,31 +270,32 @@ var findKthLargest = function(nums, k) {
   }
 
   function sink(index, nums, heapSize) {
-    while(true) {
+    while (true) {
       let minIndex = index
-      let leftIndex = 2 * minIndex + 1
-      let rightIndex = leftIndex + 1
-      if (leftIndex < heapSize && nums[minIndex] > nums[leftIndex]) {
+      const leftIndex = 2 * index + 1
+      const rightIndex = leftIndex + 1
+
+      if (leftIndex < heapSize && nums[leftIndex] < nums[minIndex]) {
         minIndex = leftIndex
       }
-      if (rightIndex < heapSize && nums[minIndex] > nums[rightIndex]) {
+      if (rightIndex < heapSize && nums[rightIndex] < nums[minIndex]) {
         minIndex = rightIndex
       }
+
       if (minIndex === index) break
-      swap(nums, minIndex, index)
+      swap(minIndex, index, nums)
       index = minIndex
     }
   }
 
-  let index = 0
-  while (index < k) {
-    swim(index, nums)
-    index ++
+  let i = 0
+  while (i < k) {
+    swim(i, nums)
+    i ++
   }
 
-  for (var j = k; j < nums.length; j ++) {
-    const first = nums[0]
-    if (nums[j] > first) {
+  for (let j = k; j < nums.length; j ++) {
+    if (nums[j] > nums[0]) {
       nums[0] = nums[j]
       sink(0, nums, k)
     }
@@ -345,3 +303,8 @@ var findKthLargest = function(nums, k) {
 
   return nums[0]
 }
+
+
+
+
+
