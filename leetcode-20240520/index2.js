@@ -195,3 +195,63 @@ function all(promises) {
     }  
   })
 }
+
+function move(index, source) {
+  return source.substring(index)
+}
+
+function parse(source) {
+  const tagStartRegExp = /^<([a-zA-Z]*)/
+  const attrRegexp = /^\s*([^<>\/"'\s=]+)(?:\s*=\s*)['"]([^<>\/"'\s=]+)['"]\s*/
+  let tagClosingRegExp = /^\s*(\/?)>/
+  let endTagRegExp = /^<s*\/s*([a-zA-Z]*)>/
+  let stack = []
+  let endIndex = 0
+  let endTagParsing = false
+
+  while (source) {
+    let currentNode = {}
+    const attrMap = new Map()
+
+    if (!endTagParsing) {
+      let startMatched 
+      if (startMatched = source.match(tagStartRegExp)) {
+        const tagType = startMatched[1]
+        currentNode.type = tagType
+        source = move(tagType.length + 1, source)
+  
+        let attrMatched
+        while (attrMatched = source.match(attrRegexp)) {
+          const matched = attrMatched[0]
+          const key = attrMatched[1]
+          const value = attrMatched[2]
+          attrMap.set(key, value)
+          currentNode.attrs = attrMap
+          source = move(matched.length, source)
+        }
+      }
+  
+      let closingMatched
+      if (closingMatched = source.match(tagClosingRegExp)) {
+        const closingTag = closingMatched[0]
+        source = move(closingTag.length, source)
+        stack.push(currentNode)
+      }
+    }
+
+    let endMatched
+    if (endMatched = source.match(endTagRegExp)) {
+      endTagParsing = true
+      endIndex ++
+      const closeTagName = endMatched[1]
+      if (stack[stack.length - endIndex].type !== closeTagName) {
+        console.log('标签未正常闭合')
+        return
+      }
+      source = move(endMatched[0].length, source)
+    }   
+  }
+  console.log('stack...', stack)
+  return stack
+}
+parse('<div classname="hello" name="jack"><div><p></p></div></div>')
